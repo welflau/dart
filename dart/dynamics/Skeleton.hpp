@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2011-2018, The DART development contributors
+ * Copyright (c) 2011-2019, The DART development contributors
  * All rights reserved.
  *
  * The list of contributors can be found at:
@@ -174,10 +174,28 @@ public:
   Skeleton& operator=(const Skeleton& _other) = delete;
 
   /// Create an identical clone of this Skeleton.
+  /// \deprecated Deprecated in DART 6.7. Please use cloneSkeleton() instead.
+  DART_DEPRECATED(6.7)
   SkeletonPtr clone() const;
+  // TODO: In DART 7, change this function to override MetaSkeleton::clone()
+  // that returns MetaSkeletonPtr
 
   /// Create an identical clone of this Skeleton, except that it has a new name.
+  /// \deprecated Deprecated in DART 6.7. Please use cloneSkeleton() instead.
+  DART_DEPRECATED(6.7)
   SkeletonPtr clone(const std::string& cloneName) const;
+  // TODO: In DART 7, change this function to override MetaSkeleton::clone()
+  // that returns MetaSkeletonPtr
+
+  /// Creates and returns a clone of this Skeleton.
+  SkeletonPtr cloneSkeleton() const;
+
+  /// Creates and returns a clone of this Skeleton.
+  SkeletonPtr cloneSkeleton(const std::string& cloneName) const;
+
+  // Documentation inherited
+  MetaSkeletonPtr cloneMetaSkeleton(
+      const std::string& cloneName) const override;
 
   /// \}
 
@@ -673,10 +691,10 @@ public:
   void updateBiasImpulse(BodyNode* _bodyNode, const Eigen::Vector6d& _imp);
 
   /// \brief Update bias impulses due to impulse [_imp] on body node [_bodyNode]
-  /// \param _bodyNode Body node contraint impulse, _imp1, is applied
-  /// \param _imp Constraint impulse expressed in body frame of _bodyNode1
-  /// \param _bodyNode Body node contraint impulse, _imp2, is applied
-  /// \param _imp Constraint impulse expressed in body frame of _bodyNode2
+  /// \param _bodyNode1 Body node contraint impulse, _imp1, is applied
+  /// \param _imp1 Constraint impulse expressed in body frame of _bodyNode1
+  /// \param _bodyNode2 Body node contraint impulse, _imp2, is applied
+  /// \param _imp2 Constraint impulse expressed in body frame of _bodyNode2
   void updateBiasImpulse(BodyNode* _bodyNode1, const Eigen::Vector6d& _imp1,
                          BodyNode* _bodyNode2, const Eigen::Vector6d& _imp2);
 

@@ -57,10 +57,11 @@ ImuSensor::ImuSensor(BodyNode* parent, const BasicProperties& properties)
   : Entity(ConstructFrame),
     Frame(parent),
     FixedFrame(parent),
-    common::EmbedStateAndPropertiesOnTopOf<ImuSensor,
-                                           detail::ImuSensorState,
-                                           detail::ImuSensorProperties,
-                                           Sensor>(parent, properties)
+    common::EmbedStateAndPropertiesOnTopOf<
+        ImuSensor,
+        detail::ImuSensorState,
+        detail::ImuSensorProperties,
+        Sensor>(parent, properties)
 {
   createAspect<Aspect>();
   setCompositeProperties(properties);

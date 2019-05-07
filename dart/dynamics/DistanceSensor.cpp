@@ -32,6 +32,8 @@
 
 #include "dart/dynamics/DistanceSensor.hpp"
 
+#if HAVE_BULLET
+
 #include "dart/collision/CollisionGroup.hpp"
 #include "dart/collision/fcl/FCLCollisionDetector.hpp"
 #include "dart/dynamics/BodyNode.hpp"
@@ -53,14 +55,16 @@ void DistanceSensor::setAspectProperties(const AspectProperties& /*properties*/)
 }
 
 //==============================================================================
-DistanceSensor::DistanceSensor(BodyNode* parent, const BasicProperties& properties)
+DistanceSensor::DistanceSensor(
+    BodyNode* parent, const BasicProperties& properties)
   : Entity(ConstructFrame),
     Frame(parent),
     FixedFrame(parent),
-    common::EmbedStateAndPropertiesOnTopOf<DistanceSensor,
-                                           detail::DistanceSensorState,
-                                           detail::DistanceSensorProperties,
-                                           Sensor>(parent, properties)
+    common::EmbedStateAndPropertiesOnTopOf<
+        DistanceSensor,
+        detail::DistanceSensorState,
+        detail::DistanceSensorProperties,
+        Sensor>(parent, properties)
 {
   createAspect<Aspect>();
   setCompositeProperties(properties);
@@ -78,5 +82,13 @@ Node* DistanceSensor::cloneNode(BodyNode* parent) const
   return sensor;
 }
 
+//==============================================================================
+void DistanceSensor::performRaycast()
+{
+
+}
+
 } // namespace dynamics
 } // namespace dart
+
+#endif // HAVE_BULLET

@@ -73,10 +73,11 @@ double TouchSensor::getRange() const
 TouchSensor::TouchSensor(BodyNode* parent, const BasicProperties& properties)
   : Entity(ConstructFrame),
     Frame(parent),
-    common::EmbedStateAndPropertiesOnTopOf<TouchSensor,
-                                           detail::TouchSensorState,
-                                           detail::TouchSensorProperties,
-                                           Sensor>(parent, properties)
+    common::EmbedStateAndPropertiesOnTopOf<
+        TouchSensor,
+        detail::TouchSensorState,
+        detail::TouchSensorProperties,
+        Sensor>(parent, properties)
 {
   createAspect<Aspect>();
   setCompositeProperties(properties);

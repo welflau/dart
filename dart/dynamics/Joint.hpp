@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2011-2018, The DART development contributors
+ * Copyright (c) 2011-2019, The DART development contributors
  * All rights reserved.
  *
  * The list of contributors can be found at:
@@ -66,6 +66,7 @@ public:
   static constexpr ActuatorType FORCE        = detail::FORCE;
   static constexpr ActuatorType PASSIVE      = detail::PASSIVE;
   static constexpr ActuatorType SERVO        = detail::SERVO;
+  static constexpr ActuatorType MIMIC        = detail::MIMIC;
   static constexpr ActuatorType ACCELERATION = detail::ACCELERATION;
   static constexpr ActuatorType VELOCITY     = detail::VELOCITY;
   static constexpr ActuatorType LOCKED       = detail::LOCKED;
@@ -115,6 +116,7 @@ public:
   Joint& operator=(const Joint& _otherJoint);
 
   /// \brief Set joint name and return the name.
+  /// \param[in] _name The specified joint name to be set.
   /// \param[in] _renameDofs If true, the names of the joint's degrees of
   /// freedom will be updated by calling updateDegreeOfFreedomNames().
   ///
@@ -134,6 +136,18 @@ public:
 
   /// Get actuator type
   ActuatorType getActuatorType() const;
+
+  /// Set mimic joint
+  void setMimicJoint(const Joint* _mimicJoint, double _mimicMultiplier = 1.0, double _mimicOffset = 0.0);
+
+  /// Get mimic joint
+  const Joint* getMimicJoint() const;
+
+  /// Get mimic joint multiplier
+  double getMimicMultiplier() const;
+
+  /// Get mimic joint offset
+  double getMimicOffset() const;
 
   /// Return true if this joint is kinematic joint.
   ///
@@ -631,7 +645,7 @@ public:
   /// BodyNode expressed in the child BodyNode frame
   const Eigen::Vector6d& getRelativeSpatialAcceleration() const;
 
-  /// Get J * \ddot{q} of this joint
+  /// Get J * \f$ \ddot{q} \f$ of this joint
   const Eigen::Vector6d& getRelativePrimaryAcceleration() const;
 
   /// Get spatial Jacobian of the child BodyNode relative to the parent BodyNode
@@ -727,7 +741,6 @@ protected:
   virtual void registerDofs() = 0;
 
   /// \brief Create a DegreeOfFreedom pointer.
-  /// \param[in] _name DegreeOfFreedom's name.
   /// \param[in] _indexInJoint DegreeOfFreedom's index within the joint. Note
   /// that the index should be unique within the joint.
   ///
@@ -780,7 +793,7 @@ protected:
   /// BodyNode expressed in the child BodyNode frame
   virtual void updateRelativeSpatialAcceleration() const = 0;
 
-  /// Update J * \ddot{q} of this joint
+  /// Update J * \f$ \ddot{q} \f$ of this joint
   virtual void updateRelativePrimaryAcceleration() const = 0;
 
   /// Update spatial Jacobian of the child BodyNode relative to the parent
@@ -877,6 +890,9 @@ protected:
   /// \param[in] _bodyForce Transmitting spatial body force from the parent
   /// BodyNode to the child BodyNode. The spatial force is expressed in the
   /// child BodyNode's frame.
+  /// \param[in] _timeStep
+  /// \param[in] _withDampingForces
+  /// \param[in] _withSpringForces
   virtual void updateForceID(const Eigen::Vector6d& _bodyForce,
                              double _timeStep,
                              bool _withDampingForces,
@@ -886,9 +902,12 @@ protected:
   /// \param[in] _bodyForce Transmitting spatial body force from the parent
   /// BodyNode to the child BodyNode. The spatial force is expressed in the
   /// child BodyNode's frame.
+  /// \param[in] _timeStep
+  /// \param[in] _withDampingForces
+  /// \param[in] _withSpringForces
   virtual void updateForceFD(const Eigen::Vector6d& _bodyForce,
                              double _timeStep,
-                             bool _withDampingForcese,
+                             bool _withDampingForces,
                              bool _withSpringForces) = 0;
 
   /// Update joint impulses for inverse dynamics

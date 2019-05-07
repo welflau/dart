@@ -49,17 +49,17 @@ TEST(Sensor, DistanceSensor)
       = loader.parseSkeleton("dart://sample/urdf/KR5/KR5 sixx R650.urdf");
 
   auto lastBn1 = skeleton1->getBodyNode(skeleton1->getNumBodyNodes() - 1);
-  auto sensor = lastBn1->createSensor<DistanceSensor>();
-  Eigen::Isometry3d tf1 = sensor->getTransform();
+  auto sensor1 = lastBn1->createSensor<DistanceSensor>();
+  Eigen::Isometry3d tf1 = sensor1->getTransform();
 
   EXPECT_TRUE(equals(tf1, lastBn1->getTransform()));
 
-  SkeletonPtr skeleton2 = skeleton1->clone();
+  SkeletonPtr skeleton2 = skeleton1->cloneSkeleton();
   BodyNode* lastBn2 = skeleton2->getBodyNode(skeleton2->getNumBodyNodes() - 1);
-  auto imuSensor2 = lastBn2->createSensor<ImuSensor>();
-  sensor->setRelativeTransform(Eigen::Isometry3d::Identity());
+  auto sensor2 = lastBn2->createSensor<DistanceSensor>();
+  sensor1->setRelativeTransform(Eigen::Isometry3d::Identity());
 
-  Eigen::Isometry3d tf2 = imuSensor2->getTransform();
+  Eigen::Isometry3d tf2 = sensor2->getTransform();
 
   EXPECT_TRUE(equals(tf2, lastBn2->getTransform()));
 

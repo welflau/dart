@@ -43,9 +43,10 @@ namespace dynamics {
 
 class BodyNode;
 
-class Sensor : public common::EmbedPropertiesOnTopOf<Sensor,
-                                                     detail::SensorProperties,
-                                                     FixedJacobianNode>
+class Sensor : public common::EmbedPropertiesOnTopOf<
+                   Sensor,
+                   detail::SensorProperties,
+                   FixedJacobianNode>
 {
 public:
   using BasicProperties

@@ -33,7 +33,12 @@
 #ifndef DART_DYNAMICS_DISTANCESENSOR_HPP_
 #define DART_DYNAMICS_DISTANCESENSOR_HPP_
 
+#include "dart/config.hpp"
+
+#if HAVE_BULLET
+
 #include <Eigen/Dense>
+#include "dart/collision/CollisionGroup.hpp"
 #include "dart/dynamics/Sensor.hpp"
 #include "dart/dynamics/detail/DistanceSensorAspect.hpp"
 
@@ -43,11 +48,11 @@ namespace dynamics {
 class BodyNode;
 
 /// This class implements Inertial Measuring Unit (IMU) sensor.
-class DistanceSensor
-    : public common::EmbedStateAndPropertiesOnTopOf<DistanceSensor,
-                                                    detail::DistanceSensorState,
-                                                    detail::DistanceSensorProperties,
-                                                    Sensor>
+class DistanceSensor : public common::EmbedStateAndPropertiesOnTopOf<
+                           DistanceSensor,
+                           detail::DistanceSensorState,
+                           detail::DistanceSensorProperties,
+                           Sensor>
 {
 public:
   using BasicProperties = common::Composite::MakeProperties<DistanceSensor>;
@@ -71,9 +76,16 @@ protected:
 
   // Documentation inherited
   Node* cloneNode(BodyNode* parent) const override;
+
+  void performRaycast();
+
+  /// Collision group
+  collision::CollisionGroupPtr mCollisionGroup;
 };
 
 } // namespace dynamics
 } // namespace dart
+
+#endif // HAVE_BULLET
 
 #endif // DART_DYNAMICS_DISTANCESENSOR_HPP_

@@ -42,12 +42,11 @@ namespace dynamics {
 
 class BodyNode;
 
-class TouchSensor
-    : public common::
-          EmbedStateAndPropertiesOnTopOf<TouchSensor,
-                                         detail::TouchSensorState,
-                                         detail::TouchSensorProperties,
-                                         Sensor>
+class TouchSensor : public common::EmbedStateAndPropertiesOnTopOf<
+                        TouchSensor,
+                        detail::TouchSensorState,
+                        detail::TouchSensorProperties,
+                        Sensor>
 {
 public:
   using BasicProperties = common::Composite::MakeProperties<Sensor>;

@@ -43,11 +43,11 @@ namespace dynamics {
 class BodyNode;
 
 /// This class implements Inertial Measuring Unit (IMU) sensor.
-class ImuSensor
-    : public common::EmbedStateAndPropertiesOnTopOf<ImuSensor,
-                                                    detail::ImuSensorState,
-                                                    detail::ImuSensorProperties,
-                                                    Sensor>
+class ImuSensor : public common::EmbedStateAndPropertiesOnTopOf<
+                      ImuSensor,
+                      detail::ImuSensorState,
+                      detail::ImuSensorProperties,
+                      Sensor>
 {
 public:
   using BasicProperties = common::Composite::MakeProperties<ImuSensor>;

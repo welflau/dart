@@ -48,10 +48,10 @@ Sensor::Sensor(BodyNode* parent, const BasicProperties& properties)
   : Entity(ConstructFrame),
     Frame(parent),
     FixedFrame(parent, properties.mRelativeTf),
-    common::EmbedPropertiesOnTopOf<Sensor,
-                                   detail::SensorProperties,
-                                   FixedJacobianNode>(
-        parent, properties.mRelativeTf)
+    common::EmbedPropertiesOnTopOf<
+        Sensor,
+        detail::SensorProperties,
+        FixedJacobianNode>(parent, properties.mRelativeTf)
 {
   createAspect<Aspect>();
   setCompositeProperties(properties);

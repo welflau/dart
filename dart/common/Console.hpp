@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2011-2018, The DART development contributors
+ * Copyright (c) 2011-2019, The DART development contributors
  * All rights reserved.
  *
  * The list of contributors can be found at:
@@ -60,7 +60,16 @@ std::ostream& colorErr(const std::string& _msg,
                        unsigned int _line,
                        int _color);
 
+
 }  // namespace common
+
+template <class T>
+auto operator<<(std::ostream& os, const T& t) -> decltype(t.print(os), os)
+{
+  t.print(os);
+  return os;
+}
+
 }  // namespace dart
 
 #endif  // DART_COMMON_CONSOLE_HPP_

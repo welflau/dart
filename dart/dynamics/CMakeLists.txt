@@ -10,15 +10,10 @@ dart_add_core_sources(${srcs} ${detail_srcs})
 dart_get_filename_components(header_names "dynamics headers" ${hdrs})
 # TODO: remove below line once the files are completely removed.
 list(REMOVE_ITEM header_names "MultiSphereShape.hpp")
-dart_generate_include_header_list(
-  dynamics_headers
+dart_generate_include_header_file(
+  "${CMAKE_CURRENT_BINARY_DIR}/dynamics.hpp"
   "dart/dynamics/"
-  "dynamics headers"
   ${header_names}
-)
-configure_file(
-  ${CMAKE_CURRENT_SOURCE_DIR}/dynamics.hpp.in
-  ${CMAKE_CURRENT_BINARY_DIR}/dynamics.hpp
 )
 
 # Install
@@ -36,8 +31,11 @@ install(
 dart_format_add(
   DistanceSensor.hpp
   DistanceSensor.cpp
+  HeightmapShape.hpp
   ImuSensor.hpp
   ImuSensor.cpp
+  PointCloudShape.hpp
+  PointCloudShape.cpp
   Sensor.hpp
   Sensor.cpp
   SmartPointer.hpp
@@ -45,8 +43,11 @@ dart_format_add(
   TouchSensor.cpp
   TranslationalJoint2D.hpp
   TranslationalJoint2D.cpp
+  VoxelGridShape.hpp
+  VoxelGridShape.cpp
   detail/DistanceSensorAspect.hpp
   detail/DistanceSensorAspect.cpp
+  detail/HeightmapShape-impl.hpp
   detail/ImuSensorAspect.hpp
   detail/ImuSensorAspect.cpp
   detail/SensorAspect.hpp

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2011-2018, The DART development contributors
+ * Copyright (c) 2011-2019, The DART development contributors
  * All rights reserved.
  *
  * The list of contributors can be found at:
@@ -145,7 +145,7 @@ MeshShape::MeshShape(
 //==============================================================================
 MeshShape::~MeshShape()
 {
-  delete mMesh;
+  aiReleaseImport(mMesh);
 }
 
 //==============================================================================
@@ -192,7 +192,7 @@ void MeshShape::notifyAlphaUpdated(double alpha)
   {
     aiMesh* mesh = mMesh->mMeshes[i];
     for(std::size_t j=0; j<mesh->mNumVertices; ++j)
-      mesh->mColors[0][j][3] = alpha;
+      mesh->mColors[0][j].a = alpha;
   }
 }
 
@@ -240,6 +240,8 @@ void MeshShape::setMesh(
     mMeshPath.clear();
 
   mResourceRetriever = std::move(resourceRetriever);
+
+  incrementVersion();
 }
 
 //==============================================================================
@@ -250,6 +252,8 @@ void MeshShape::setScale(const Eigen::Vector3d& scale)
   mScale = scale;
   mIsBoundingBoxDirty = true;
   mIsVolumeDirty = true;
+
+  incrementVersion();
 }
 
 //==============================================================================
@@ -385,6 +389,7 @@ const aiScene* MeshShape::loadMesh(const std::string& _uri, const common::Resour
   if(!scene)
   {
     dtwarn << "[MeshShape::loadMesh] Failed loading mesh '" << _uri << "'.\n";
+    aiReleasePropertyStore(propertyStore);
     return nullptr;
   }
 
@@ -409,6 +414,8 @@ const aiScene* MeshShape::loadMesh(const std::string& _uri, const common::Resour
   scene = aiApplyPostProcessing(scene, aiProcess_PreTransformVertices);
   if(!scene)
     dtwarn << "[MeshShape::loadMesh] Failed pre-transforming vertices.\n";
+
+  aiReleasePropertyStore(propertyStore);
 
   return scene;
 }

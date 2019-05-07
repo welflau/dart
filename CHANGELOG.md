@@ -1,18 +1,335 @@
 ## DART 6
 
-### DART 6.5.0 (201X-XX-XX)
+### [DART 6.9.0 (20XX-XX-XX)](https://github.com/dartsim/dart/milestone/52?closed=1)
+
+* Parser
+
+  * Changed URDF parser to use URDF material color when specified: [#1295](https://github.com/dartsim/dart/pull/1295)
+
+* GUI
+
+  * Added heightmap support to OSG renderer: [#1293](https://github.com/dartsim/dart/pull/1293)
+  * Improved voxel grid and point cloud rendering performance: [#1294](https://github.com/dartsim/dart/pull/1294)
+  * Fixed incorrect alpha value update of InteractiveFrame: [#1297](https://github.com/dartsim/dart/pull/1297)
+
+* Examples and Tutorials
+
+  * Updated examples directory to make dart::gui::osg more accessible: [#1305](https://github.com/dartsim/dart/pull/1305)
+
+* dartpy
+
+  * Switched to pybind11: [#1307](https://github.com/dartsim/dart/pull/1307)
+
+### [DART 6.8.4 (2019-05-03)](https://github.com/dartsim/dart/milestone/56?closed=1)
+
+#### Changes
+
+* GUI
+
+  * Fixed crashing on exiting OSG + ImGui applications: [#1303](https://github.com/dartsim/dart/pull/1303)
+
+#### Compilers Tested
+
+* Linux
+
+  * GCC 64-bit: 5.4.0, 7.3.0, 8.2.0
+  * GCC 32-bit: 5.4.0
+
+* macOS
+
+  * AppleClang: 9.1.0, 10.0.0
+
+### [DART 6.8.3 (2019-05-01)](https://github.com/dartsim/dart/milestone/55?closed=1)
+
+#### Changes
+
+* Parser
+
+  * Fixed VskParker returning incorrect resource retriever: [#1300](https://github.com/dartsim/dart/pull/1300)
+
+* Build
+
+  * Fixed building with pagmo's optional dependencies: [#1301](https://github.com/dartsim/dart/pull/1301)
+
+#### Compilers Tested
+
+* Linux
+
+  * GCC 64-bit: 5.4.0, 7.3.0, 8.2.0
+  * GCC 32-bit: 5.4.0
+
+* macOS
+
+  * AppleClang: 9.1.0, 10.0.0
+
+### [DART 6.8.2 (2019-04-23)](https://github.com/dartsim/dart/milestone/54?closed=1)
+
+#### Changes
+
+* Dynamics
+
+  * Fixed BoxedLcpConstraintSolver is not API compatible with 6.7: [#1291](https://github.com/dartsim/dart/pull/1291)
+
+* Build
+
+  * Fixed building with FCL built without Octomap: [#1292](https://github.com/dartsim/dart/pull/1292)
+
+#### Compilers Tested
+
+* Linux
+
+  * GCC 64-bit: 5.4.0, 7.3.0, 8.2.0
+  * GCC 32-bit: 5.4.0
+
+* macOS
+
+  * AppleClang: 9.1.0, 10.0.0
+
+### [DART 6.8.1 (2019-04-23)](https://github.com/dartsim/dart/milestone/53?closed=1)
+
+#### Changes
+
+* Build System
+
+  * Fixed invalid double quotation marks in DARTFindBoost.cmake: [#1283](https://github.com/dartsim/dart/pull/1283)
+  * Disabled octomap support on macOS: [#1284](https://github.com/dartsim/dart/pull/1284)
+
+#### Compilers Tested
+
+* Linux
+
+  * GCC 64-bit: 5.4.0, 7.3.0, 8.2.0
+  * GCC 32-bit: 5.4.0
+
+* macOS
+
+  * AppleClang: 9.1.0, 10.0.0
+
+### [DART 6.8.0 (2019-04-22)](https://github.com/dartsim/dart/milestone/48?closed=1)
+
+#### Changes
+
+* Kinematics
+
+  * Added findSolution() and solveAndApply() to InverseKinematics and HierarchicalIk classes and deprecated solve(~) member functions: [#1266](https://github.com/dartsim/dart/pull/1266)
+  * Added an utility constructor to Linkage::Criteria to create sequence Linkage: [#1273](https://github.com/dartsim/dart/pull/1273)
+
+* Dynamics
+
+  * Fixed incorrect transpose check in Inertia::verifySpatialTensor(): [#1258](https://github.com/dartsim/dart/pull/1258)
+  * Allowed BoxedLcpConstraintSolver to have a secondary LCP solver: [#1265](https://github.com/dartsim/dart/pull/1265)
+
+* Simulation
+
+  * The LCP solver will be less aggressive about printing out unnecessary warnings: [#1238](https://github.com/dartsim/dart/pull/1238)
+  * Fixed not copying constraints in World::setConstraintSolver(): [#1260](https://github.com/dartsim/dart/pull/1260)
+
+* Collision Detection
+
+  * The BodyNodeCollisionFilter will ignore contacts between immobile bodies: [#1232](https://github.com/dartsim/dart/pull/1232)
+
+* Planning
+
+  * Fixed linking error of FLANN by explicitly linking to lz4: [#1221](https://github.com/dartsim/dart/pull/1221)
+
+* Python
+
+  * Added (experimental) Python binding: [#1237](https://github.com/dartsim/dart/pull/1237)
+
+* Parsers
+
+  * Changed urdf parser to warn if robot model has multi-tree: [#1270](https://github.com/dartsim/dart/pull/1270)
+
+* GUI
+
+  * Updated ImGui to 1.69: [#1274](https://github.com/dartsim/dart/pull/1274)
+  * Added VoxelGridShape support to OSG renderer: [#1276](https://github.com/dartsim/dart/pull/1276)
+  * Added PointCloudShape and its OSG rendering: [#1277](https://github.com/dartsim/dart/pull/1277)
+  * Added grid visual to OSG renderer: [#1278](https://github.com/dartsim/dart/pull/1278), [#1280](https://github.com/dartsim/dart/pull/1280)
+
+* Build System
+
+  * Changed to use GNUInstallDirs for install paths: [#1241](https://github.com/dartsim/dart/pull/1241)
+  * Fixed not failing for missing required dependencies: [#1250](https://github.com/dartsim/dart/pull/1250)
+  * Fixed attempting to link octomap when not imported: [#1253](https://github.com/dartsim/dart/pull/1253)
+  * Fixed not defining boost targets: [#1254](https://github.com/dartsim/dart/pull/1254)
+
+#### Compilers Tested
+
+* Linux
+
+  * GCC 64-bit: 5.4.0, 7.3.0, 8.2.0
+  * GCC 32-bit: 5.4.0
+
+* macOS
+
+  * AppleClang: 9.1.0, 10.0.0
+
+### [DART 6.7.3 (2019-02-19)](https://github.com/dartsim/dart/milestone/51?closed=1)
+
+#### Changes
+
+* Dynamics
+
+  * Fixed Skeleton::setState(): [#1245](https://github.com/dartsim/dart/pull/1245)
+
+#### Compilers Tested
+
+* Linux
+
+  * GCC (C++11): 5.4.0, 7.3.0, 8.2.0
+
+* Linux (32-bit)
+
+  * GCC (C++11): 5.4.0
+
+* macOS
+
+  * AppleClang (C++11): 9.1.0
+
+### [DART 6.7.2 (2019-01-17)](https://github.com/dartsim/dart/milestone/50?closed=1)
+
+#### Changes
+
+* Build system
+
+  * Fixed #1223 for the recursive case: [#1227](https://github.com/dartsim/dart/pull/1227)
+  * Specified mode for find_package(): [#1228](https://github.com/dartsim/dart/pull/1228)
+
+#### Compilers Tested
+
+* Linux
+
+  * GCC (C++11): 5.4.0, 7.3.0, 8.2.0
+
+* Linux (32-bit)
+
+  * GCC (C++11): 5.4.0
+
+* macOS
+
+  * AppleClang (C++11): 9.1.0
+
+### [DART 6.7.1 (2019-01-15)](https://github.com/dartsim/dart/milestone/49?closed=1)
+
+#### Changes
+
+* Build system
+
+  * Ensure that imported targets of dependencies are always created when finding the dart package: [#1222](https://github.com/dartsim/dart/pull/1222)
+  * Set components to not-found when their external dependencies are missing: [#1223](https://github.com/dartsim/dart/pull/1223)
+
+#### Compilers Tested
+
+* Linux
+
+  * GCC (C++11): 5.4.0, 7.3.0, 8.2.0
+
+* Linux (32-bit)
+
+  * GCC (C++11): 5.4.0
+
+* macOS
+
+  * AppleClang (C++11): 9.1.0
+
+### [DART 6.7.0 (2019-01-10)](https://github.com/dartsim/dart/milestone/45?closed=1)
+
+#### Changes
+
+* Build system
+
+  * Fixed compilation warnings for newer versions of compilers: [#1177](https://github.com/dartsim/dart/pull/1177)
+  * Changed to generate namespace headers without requiring *.hpp.in files: [#1192](https://github.com/dartsim/dart/pull/1192)
+  * Dropped supporting Ubuntu Trusty and started using imported targets of dependencies: [#1212](https://github.com/dartsim/dart/pull/1212)
+
+* Collision Detection
+
+  * CollisionGroups will automatically update their objects when any changes occur to Skeletons or BodyNodes that they are subscribed to: [#1112](https://github.com/dartsim/dart/pull/1112)
+  * Contact points with negative penetration depth will be ignored: [#1185](https://github.com/dartsim/dart/pull/1185)
+
+* Math
+
+  * Consolidated random functions into Random class: [#1109](https://github.com/dartsim/dart/pull/1109)
+
+* Dynamics
+
+  * Refactor constraint solver: [#1099](https://github.com/dartsim/dart/pull/1099), [#1101](https://github.com/dartsim/dart/pull/1101)
+  * Added mimic joint functionality as a new actuator type: [#1178](https://github.com/dartsim/dart/pull/1178)
+  * Added clone function to MetaSkeleton: [#1201](https://github.com/dartsim/dart/pull/1201)
+
+* Optimization
+
+  * Added multi-objective optimization with pagmo2 support: [#1106](https://github.com/dartsim/dart/pull/1106)
+
+* GUI
+
+  * Reorganized OpenGL and GLUT files: [#1088](https://github.com/dartsim/dart/pull/1088)
+  * Added the RealTimeWorldNode to display simulations at real-time rates: [#1216](https://github.com/dartsim/dart/pull/1216)
+
+* Misc
+
+  * Updated Googletest to version 1.8.1: [#1214](https://github.com/dartsim/dart/pull/1214)
+
+#### Compilers Tested
+
+* Linux
+
+  * GCC (C++11): 5.4.0, 7.3.0, 8.2.0
+
+* Linux (32-bit)
+
+  * GCC (C++11): 5.4.0
+
+* macOS
+
+  * AppleClang (C++11): 9.1.0
+
+### [DART 6.6.2 (2018-09-03)](https://github.com/dartsim/dart/milestone/47?closed=1)
+
+* Utils
+
+  * Fixed checking file existence in DartResourceRetriever: [#1107](https://github.com/dartsim/dart/pull/1107)
+
+### [DART 6.6.1 (2018-08-04)](https://github.com/dartsim/dart/milestone/46?closed=1)
+
+* Utils
+
+  * Added option to DartResourceRetriever to search from environment variable DART_DATA_PATH: [#1095](https://github.com/dartsim/dart/pull/1095)
+
+* Examples
+
+  * Fixed CMakeLists.txt of humanJointLimits: [#1094](https://github.com/dartsim/dart/pull/1094)
+
+### [DART 6.6.0 (2018-08-02)](https://github.com/dartsim/dart/milestone/44?closed=1)
+
+* Collision detection
+
+  * Added voxel grid map: [#1076](https://github.com/dartsim/dart/pull/1076), [#1083](https://github.com/dartsim/dart/pull/1083)
+  * Added heightmap support: [#1069](https://github.com/dartsim/dart/pull/1069)
+
+### [DART 6.5.0 (2018-05-12)](https://github.com/dartsim/dart/milestone/41?closed=1)
 
 * Common
 
   * Added LockableReference classes: [#1011](https://github.com/dartsim/dart/pull/1011)
+  * Added missing \<vector\> to Memory.hpp: [#1057](https://github.com/dartsim/dart/pull/1057)
 
 * GUI
 
   * Added FOV API to OSG viewer: [#1048](https://github.com/dartsim/dart/pull/1048)
 
+* Parsers
+
+  * Fixed incorrect parsing of continuous joints specified in URDF [#1064](https://github.com/dartsim/dart/pull/1064)
+
 * Simulation
 
   * Added World::hasSkeleton(): [#1050](https://github.com/dartsim/dart/pull/1050)
+
+* Misc
+
+  * Fixed memory leaks in mesh loading: [#1066](https://github.com/dartsim/dart/pull/1066)
 
 ### [DART 6.4.0 (2018-03-26)](https://github.com/dartsim/dart/milestone/39?closed=1)
 
@@ -180,7 +497,7 @@
 
 * Misc
 
-  * Updated lodepng up to version 20160501 : [#791](https://github.com/dartsim/dart/pull/791)
+  * Updated lodepng up to version 20160501: [#791](https://github.com/dartsim/dart/pull/791)
 
 ### DART 6.1.0 (2016-10-07)
 
@@ -240,7 +557,7 @@
 
 * Common data structures
 
-  * Added `Node`, `Aspect`, `State`, and `Properties`: [#713](https://github.com/dartsim/dart/pull/713), [#712](https://github.com/dartsim/dart/issues/712), [#708](https://github.com/dartsim/dart/pull/708), [#707](https://github.com/dartsim/dart/pull/707), [#659](https://github.com/dartsim/dart/pull/659), [#649](https://github.com/dartsim/dart/pull/649), [#645](https://github.com/dartsim/dart/issues/645), [#607](https://github.com/dartsim/dart/pull/607), [#598](https://github.com/dartsim/dart/pull/598), [#591](https://github.com/dartsim/dart/pull/591), [#531](https://github.com/dartsim/dart/pull/531) 
+  * Added `Node`, `Aspect`, `State`, and `Properties`: [#713](https://github.com/dartsim/dart/pull/713), [#712](https://github.com/dartsim/dart/issues/712), [#708](https://github.com/dartsim/dart/pull/708), [#707](https://github.com/dartsim/dart/pull/707), [#659](https://github.com/dartsim/dart/pull/659), [#649](https://github.com/dartsim/dart/pull/649), [#645](https://github.com/dartsim/dart/issues/645), [#607](https://github.com/dartsim/dart/pull/607), [#598](https://github.com/dartsim/dart/pull/598), [#591](https://github.com/dartsim/dart/pull/591), [#531](https://github.com/dartsim/dart/pull/531)
   * Added mathematical constants and user-defined literals for radian, degree, and pi: [#669](https://github.com/dartsim/dart/pull/669), [#314](https://github.com/dartsim/dart/issues/314)
   * Added `ShapeFrame` and `ShapeNode`: [#608](https://github.com/dartsim/dart/pull/608)
   * Added `BoundingBox`: [#547](https://github.com/dartsim/dart/pull/547), [#546](https://github.com/dartsim/dart/issues/546)
@@ -343,10 +660,10 @@
 
 ### Version 5.1.6 (2017-08-08)
 
-1. Improved camera movement of OpenGL GUI: smooth zooming and translation 
+1. Improved camera movement of OpenGL GUI: smooth zooming and translation
     * [Pull request #843](https://github.com/dartsim/dart/pull/843)
 
-1. Removed debian meta files from the main DART repository
+2. Removed debian meta files from the main DART repository
     * [Pull request #853](https://github.com/dartsim/dart/pull/853)
 
 ### Version 5.1.5 (2017-01-20)

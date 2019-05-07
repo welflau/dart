@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2011-2018, The DART development contributors
+ * Copyright (c) 2011-2019, The DART development contributors
  * All rights reserved.
  *
  * The list of contributors can be found at:
@@ -205,7 +205,7 @@ std::ostream& operator<<(std::ostream& str, const aiColor4D& c)
 //==============================================================================
 bool checkSpecularSanity(const aiColor4D& c)
 {
-  if(c[0] >= 1.0 && c[1] >= 1.0 && c[2] >= 1.0 && c[3] >= 1.0)
+  if(c.r >= 1.0 && c.g >= 1.0 && c.b >= 1.0 && c.a >= 1.0)
     return false;
 
   return true;
@@ -377,6 +377,12 @@ std::vector<std::string> MeshShapeNode::getTextureImagePaths(
 {
   if (index < mTextureImageArrays.size())
     return mTextureImageArrays[index];
+
+  // We sometimes use this value for meshes that do not have material
+  // information, since assimp does not seem to have a built-in way to express
+  // that case.
+  if (index == std::numeric_limits<unsigned int>::max())
+    return {};
 
   if (!mTextureImageArrays.empty())
   {

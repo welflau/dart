@@ -6,6 +6,11 @@ dart_add_test("comprehensive" test_Frames)
 dart_add_test("comprehensive" test_InverseKinematics)
 dart_add_test("comprehensive" test_NameManagement)
 
+if(TARGET dart-optimizer-pagmo)
+  dart_add_test("comprehensive" test_MultiObjectiveOptimization)
+  target_link_libraries(test_MultiObjectiveOptimization dart-optimizer-pagmo)
+endif()
+
 dart_add_test("comprehensive" test_Distance)
 if(TARGET dart-collision-bullet)
   target_link_libraries(test_Distance dart-collision-bullet)
@@ -31,6 +36,9 @@ if(TARGET dart-utils)
   dart_add_test("comprehensive" test_Skeleton)
   target_link_libraries(test_Skeleton dart-utils)
 
+  dart_add_test("comprehensive" test_MetaSkeleton)
+  target_link_libraries(test_MetaSkeleton dart-utils)
+
   dart_add_test("comprehensive" test_SoftDynamics)
   target_link_libraries(test_SoftDynamics dart-utils)
 
@@ -46,3 +54,8 @@ if(TARGET dart-utils)
   endif()
 
 endif()
+
+dart_format_add(
+  test_InverseKinematics.cpp
+  test_MultiObjectiveOptimization.cpp
+)
