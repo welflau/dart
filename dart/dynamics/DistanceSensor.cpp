@@ -30,24 +30,53 @@
  *   POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "dart/dynamics/detail/ImuSensorAspect.hpp"
+#include "dart/dynamics/DistanceSensor.hpp"
+
+#include "dart/collision/CollisionGroup.hpp"
+#include "dart/collision/fcl/FCLCollisionDetector.hpp"
+#include "dart/dynamics/BodyNode.hpp"
+#include "dart/dynamics/SphereShape.hpp"
 
 namespace dart {
 namespace dynamics {
-namespace detail {
 
 //==============================================================================
-ImuSensorProperties::ImuSensorProperties(double range) : mRange(range)
+void DistanceSensor::setAspectState(const AspectState& /*state*/)
 {
-  // Do nothing
+  // TODO
 }
 
 //==============================================================================
-ImuSensorState::ImuSensorState(bool hasDetected) : mHasDetected(hasDetected)
+void DistanceSensor::setAspectProperties(const AspectProperties& /*properties*/)
 {
-  // Do nothing
+  // TODO
 }
 
-} // namespace detail
+//==============================================================================
+DistanceSensor::DistanceSensor(BodyNode* parent, const BasicProperties& properties)
+  : Entity(ConstructFrame),
+    Frame(parent),
+    FixedFrame(parent),
+    common::EmbedStateAndPropertiesOnTopOf<DistanceSensor,
+                                           detail::DistanceSensorState,
+                                           detail::DistanceSensorProperties,
+                                           Sensor>(parent, properties)
+{
+  createAspect<Aspect>();
+  setCompositeProperties(properties);
+}
+
+//==============================================================================
+Node* DistanceSensor::cloneNode(BodyNode* parent) const
+{
+  auto* sensor = new DistanceSensor(parent, BasicProperties());
+  sensor->duplicateAspects(this);
+
+  if (mIK)
+    sensor->mIK = mIK->clone(sensor);
+
+  return sensor;
+}
+
 } // namespace dynamics
 } // namespace dart

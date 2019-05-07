@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2011-2017, The DART development contributors
+ * Copyright (c) 2011-2019, The DART development contributors
  * All rights reserved.
  *
  * The list of contributors can be found at:
@@ -42,22 +42,22 @@ using namespace dart::dynamics;
 using namespace dart::simulation;
 
 //==============================================================================
-TEST(Sensor, ImuSensor)
+TEST(Sensor, DistanceSensor)
 {
   dart::utils::DartLoader loader;
   SkeletonPtr skeleton1
       = loader.parseSkeleton("dart://sample/urdf/KR5/KR5 sixx R650.urdf");
 
   auto lastBn1 = skeleton1->getBodyNode(skeleton1->getNumBodyNodes() - 1);
-  auto imuSensor1 = lastBn1->createSensor<ImuSensor>();
-  Eigen::Isometry3d tf1 = imuSensor1->getTransform();
+  auto sensor = lastBn1->createSensor<DistanceSensor>();
+  Eigen::Isometry3d tf1 = sensor->getTransform();
 
   EXPECT_TRUE(equals(tf1, lastBn1->getTransform()));
 
   SkeletonPtr skeleton2 = skeleton1->clone();
   BodyNode* lastBn2 = skeleton2->getBodyNode(skeleton2->getNumBodyNodes() - 1);
   auto imuSensor2 = lastBn2->createSensor<ImuSensor>();
-  imuSensor1->setRelativeTransform(Eigen::Isometry3d::Identity());
+  sensor->setRelativeTransform(Eigen::Isometry3d::Identity());
 
   Eigen::Isometry3d tf2 = imuSensor2->getTransform();
 

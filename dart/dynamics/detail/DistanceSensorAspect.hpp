@@ -30,24 +30,32 @@
  *   POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "dart/dynamics/detail/ImuSensorAspect.hpp"
+#ifndef DART_DYNAMICS_DETAIL_DISTANCESENSORASPECT_HPP_
+#define DART_DYNAMICS_DETAIL_DISTANCESENSORASPECT_HPP_
+
+#include <Eigen/Core>
+#include "dart/math/Helpers.hpp"
 
 namespace dart {
 namespace dynamics {
 namespace detail {
 
-//==============================================================================
-ImuSensorProperties::ImuSensorProperties(double range) : mRange(range)
+struct DistanceSensorProperties
 {
-  // Do nothing
-}
+  double mRange;
 
-//==============================================================================
-ImuSensorState::ImuSensorState(bool hasDetected) : mHasDetected(hasDetected)
+  DistanceSensorProperties(double range = 0.01);
+};
+
+struct DistanceSensorState
 {
-  // Do nothing
-}
+  bool mHasDetected;
+
+  DistanceSensorState(bool hasDetected = false);
+};
 
 } // namespace detail
 } // namespace dynamics
 } // namespace dart
+
+#endif // DART_DYNAMICS_DETAIL_DISTANCESENSORASPECT_HPP_

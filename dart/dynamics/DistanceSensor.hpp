@@ -30,24 +30,50 @@
  *   POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "dart/dynamics/detail/ImuSensorAspect.hpp"
+#ifndef DART_DYNAMICS_DISTANCESENSOR_HPP_
+#define DART_DYNAMICS_DISTANCESENSOR_HPP_
+
+#include <Eigen/Dense>
+#include "dart/dynamics/Sensor.hpp"
+#include "dart/dynamics/detail/DistanceSensorAspect.hpp"
 
 namespace dart {
 namespace dynamics {
-namespace detail {
 
-//==============================================================================
-ImuSensorProperties::ImuSensorProperties(double range) : mRange(range)
+class BodyNode;
+
+/// This class implements Inertial Measuring Unit (IMU) sensor.
+class DistanceSensor
+    : public common::EmbedStateAndPropertiesOnTopOf<DistanceSensor,
+                                                    detail::DistanceSensorState,
+                                                    detail::DistanceSensorProperties,
+                                                    Sensor>
 {
-  // Do nothing
-}
+public:
+  using BasicProperties = common::Composite::MakeProperties<DistanceSensor>;
+  using State = common::Composite::State;
+  using Properties = common::Composite::Properties;
 
-//==============================================================================
-ImuSensorState::ImuSensorState(bool hasDetected) : mHasDetected(hasDetected)
-{
-  // Do nothing
-}
+  friend class BodyNode;
 
-} // namespace detail
+  /// Destructor
+  ~DistanceSensor() override = default;
+
+  /// Set the AspectState of this Sensor
+  void setAspectState(const AspectState& state);
+
+  /// Set the AspectProperties of this Sensor
+  void setAspectProperties(const AspectProperties& properties);
+
+protected:
+  /// Constructor used by BodyNode
+  DistanceSensor(BodyNode* parent, const BasicProperties& properties);
+
+  // Documentation inherited
+  Node* cloneNode(BodyNode* parent) const override;
+};
+
 } // namespace dynamics
 } // namespace dart
+
+#endif // DART_DYNAMICS_DISTANCESENSOR_HPP_

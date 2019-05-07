@@ -34,6 +34,8 @@ install(
 )
 
 dart_format_add(
+  DistanceSensor.hpp
+  DistanceSensor.cpp
   ImuSensor.hpp
   ImuSensor.cpp
   Sensor.hpp
@@ -43,6 +45,8 @@ dart_format_add(
   TouchSensor.cpp
   TranslationalJoint2D.hpp
   TranslationalJoint2D.cpp
+  detail/DistanceSensorAspect.hpp
+  detail/DistanceSensorAspect.cpp
   detail/ImuSensorAspect.hpp
   detail/ImuSensorAspect.cpp
   detail/SensorAspect.hpp

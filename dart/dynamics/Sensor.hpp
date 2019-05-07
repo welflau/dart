@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2011-2017, The DART development contributors
+ * Copyright (c) 2011-2019, The DART development contributors
  * All rights reserved.
  *
  * The list of contributors can be found at:
@@ -53,7 +53,7 @@ public:
   using Properties = common::Composite::Properties;
 
   /// Destructor
-  virtual ~Sensor() = default;
+  ~Sensor() override = default;
 
   /// Set the AspectProperties of this Sensor
   void setAspectProperties(const AspectProperties& properties);
